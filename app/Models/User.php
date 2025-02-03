@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'ruta_foto',
+        'foto_id',
     ];
 
     /**
@@ -50,5 +50,9 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Models\Role');
+    }
+    public function foto()
+    {
+        return $this->belongsTo(Foto::class, 'foto_id');
     }
 }

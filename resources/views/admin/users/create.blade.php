@@ -73,8 +73,8 @@
 
             <!-- Campo para subir foto -->
             <div class="mb-3">
-                <label for="ruta_foto" class="form-label">Foto:</label>
-                <input type="file" name="ruta_foto" class="form-control" accept="image/*">
+                <label for="foto_id" class="form-label">Foto:</label>
+                <input type="file" name="foto_id" class="form-control" accept="image/*">
             </div>
 
             <!-- Botones para crear y limpiar formulario -->

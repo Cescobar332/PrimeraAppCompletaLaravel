@@ -38,30 +38,37 @@ class AdminUsersController extends Controller
             'email' => 'required|string|email|max:255|confirmed|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role_id' => 'required|exists:roles,id',
-            'ruta_foto' => 'nullable|image|max:2048' // Validación para la imagen
+            'foto_id' => 'nullable|image|max:2048' // Validación para la imagen
         ]);
 
-        // Crear un nuevo usuario con los datos del formulario
         $entrada = $request->all();
+        $foto_id = null; // Inicializa la variable foto_id
 
-        // Si se sube una imagen, guardarla y asignar la ruta
-        if ($archivo = $request->file('ruta_foto')) {
-            $nombre = time() . '_' . $archivo->getClientOriginalName(); // Usar un nombre único para evitar conflictos
-            $archivo->move(public_path('images'), $nombre); // Mueve la imagen a la carpeta `public/images`
-            $entrada['ruta_foto'] = 'images/' . $nombre; // Guarda la ruta completa
+        if ($archivo = $request->file('foto_id')) {
+            $nombre = time() . '_' . $archivo->getClientOriginalName();
+            $archivo->move(public_path('images'), $nombre);
+            $ruta_foto = 'images/' . $nombre;
+
+            // Guardamos la imagen en la tabla fotos y obtenemos su ID
+            $foto_id = \DB::table('fotos')->insertGetId([
+                'ruta_foto' => $ruta_foto,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
         }
 
-        // Crear el usuario con la información del formulario
+        // Crear el usuario con el ID de la foto
         User::create([
             'name' => $entrada['name'],
             'email' => $entrada['email'],
             'password' => bcrypt($entrada['password']),
             'role_id' => $entrada['role_id'],
-            'ruta_foto' => $entrada['ruta_foto'] ?? null // Asigna null si no se sube foto
+            'foto_id' => $foto_id // Guardamos el ID de la foto en la tabla users
         ]);
 
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
     }
+
 
 
     /**
