@@ -67,7 +67,8 @@ class AdminUsersController extends Controller
             'foto_id' => $foto_id // Guardamos el ID de la foto en la tabla users
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
+        session()->flash('success', 'Usuario creado correctamente');
+        return redirect()->route('users.index');
     }
 
 
@@ -146,7 +147,8 @@ class AdminUsersController extends Controller
         // Guardar cambios
         $user->save();
 
-        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
+        session()->flash('success', 'Usuario actualizado correctamente');
+        return redirect()->route('users.index');
     }
 
 
@@ -172,6 +174,7 @@ class AdminUsersController extends Controller
         // Eliminar el usuario
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
+        session()->flash('success', 'Usuario eliminado correctamente');
+        return redirect()->route('users.index');
     }
 }

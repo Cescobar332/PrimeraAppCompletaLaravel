@@ -14,6 +14,14 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Lista de Usuarios</h1>
+        
+        <!-- Mostrar mensaje de éxito -->
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
         <!-- Botón para crear un nuevo usuario -->
         <div class="mb-3">
