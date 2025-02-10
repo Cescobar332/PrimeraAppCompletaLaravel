@@ -80,7 +80,8 @@
                 @if ($user->foto)
                     <div class="mt-2">
                         <p>Foto actual:</p>
-                        <img src="/images/{{ $user->foto ? $user->foto->ruta_foto : '-' }}" width="100">
+                        <img src="{{ asset($user->foto->ruta_foto) }}" alt="Foto del usuario" class="img-thumbnail"
+                            width="150">
                     </div>
                 @endif
             </div>

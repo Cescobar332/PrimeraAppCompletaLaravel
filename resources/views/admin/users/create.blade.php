@@ -27,7 +27,8 @@
         @endif
 
         <!-- Formulario para crear un nuevo usuario -->
-        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" class="shadow p-4 bg-light rounded" id="userForm">
+        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data"
+            class="shadow p-4 bg-light rounded" id="userForm">
             @csrf <!-- Protección contra ataques CSRF -->
 
             <!-- Campo Nombre -->
@@ -45,7 +46,8 @@
             <!-- Campo Verificación de Email -->
             <div class="mb-3">
                 <label for="email_confirmation" class="form-label">Confirmar email:</label>
-                <input type="email" name="email_confirmation" class="form-control" value="{{ old('email_confirmation') }}" required>
+                <input type="email" name="email_confirmation" class="form-control"
+                    value="{{ old('email_confirmation') }}" required>
             </div>
 
             <!-- Campo Contraseña -->
@@ -77,10 +79,11 @@
                 <input type="file" name="foto_id" class="form-control" accept="image/*">
             </div>
 
-            <!-- Botones para crear y limpiar formulario -->
+            <!-- Botones para crear, limpiar y cancelar -->
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Crear usuario</button>
                 <button type="button" class="btn btn-secondary" onclick="clearForm()">Limpiar</button>
+                <a href="{{ route('users.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
